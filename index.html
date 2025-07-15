@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>library-app</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <h1>library-app</h1>
-    <h2>Libraries</h2>
-    <ul>
-        <li>myLibrary</li>
-    </ul>
-    <h3>Books in selected library</h3>
-    <ul class="library">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>library-app</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <header class="header">
+            <h1>library-app</h1>
+        </header>
 
-    </ul>
-    <form action="">
-        <fieldset>
-            <label for="name">Name:</label>
-            <input type="text" placeholder="Name" id="name">
-        </fieldset>
-        <fieldset>
-            <label for="author">Author:</label>
-            <input type="text" placeholder="Author" id="author">
-        </fieldset>
-        <fieldset>
-            <label for="number-of-pages">Number of Pages:</label>
-            <input type="number" placeholder="Number of Pages" id="number-of-pages">
-        </fieldset>
-        <fieldset>
-            <label for="is-read">Did you read it?:</label>
-            <input type="checkbox" id="is-read">
-        </fieldset>
-    </form>
-    <button class="button add">Add Book</button>
-    <button class="button clear">Clear Form</button>
-</body>
+        <div class="main">
+            <div class="library-list">
+                <h2>Libraries</h2>
+                <ul>
+                    <li class="current-library">
+                        <img
+                            src="public/bookshelf.svg"
+                            alt="icon of a bookshelf"
+                        />
+                        <h3>My Library</h3>
+                    </li>
+                </ul>
+            </div>
+            <div class="book-list">
+                <h3>Books in selected library</h3>
+                <ul class="library"></ul>
+            </div>
+            <div class="library-editor">
+                <h3>Library Editor</h3>
+                <form action="">
+                    <fieldset>
+                        <label for="name">Name:</label>
+                        <input type="text" placeholder="Name" id="name" />
+                    </fieldset>
+                    <fieldset>
+                        <label for="author">Author:</label>
+                        <input type="text" placeholder="Author" id="author" />
+                    </fieldset>
+                    <fieldset>
+                        <label for="number-of-pages">Number of Pages:</label>
+                        <input
+                            type="number"
+                            placeholder="Number of Pages"
+                            id="number-of-pages"
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <label for="is-read">Did you read it?:</label>
+                        <input type="checkbox" id="is-read" />
+                    </fieldset>
+                </form>
+            </div>
+            <div class="library-buttons">
+                <button class="button add">Add Book</button>
+                <button class="button clear">Clear Form</button>
+            </div>
+        </div>
+    </body>
 </html>

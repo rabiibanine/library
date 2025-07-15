@@ -6,7 +6,7 @@ const inputAuthor = document.querySelector("#author");
 const inputNumberOfPages = document.querySelector("#number-of-pages");
 const inputIsRead = document.querySelector("#is-read");
 
-const myLibrary = [];
+let myLibrary = []; 
 
 const book1 = new Book("Hacker's Delight", "Henry S. Warren", 306, false);
 const book2 = new Book(
@@ -38,6 +38,10 @@ function displayLibrary(library) {
 function createBookElement(book) {
     const bookElement = document.createElement("li");
     bookElement.classList.add("book");
+    const imageElement = document.createElement("img");
+    imageElement.src = 'public/book-icon.svg';
+    imageElement.alt = 'image of a book';
+    bookElement.appendChild(imageElement);
     const nameElement = document.createElement("h3");
     nameElement.textContent = `Name: ${book.name}`;
     bookElement.appendChild(nameElement);
@@ -48,7 +52,9 @@ function createBookElement(book) {
     pagesElement.textContent = `Number Of Pages: ${book.pages}`;
     bookElement.appendChild(pagesElement);
     const isReadElement = document.createElement("h4");
-    isReadElement.textContent = `Did you read it yet? ${book.isRead ? 'yes' : 'no'}`
+    isReadElement.textContent = `Did you read it yet?: ${
+        book.isRead ? "yes" : "no"
+    }`;
     bookElement.appendChild(isReadElement);
     const removeSelfButton = document.createElement("button");
     removeSelfButton.textContent = "Remove";
@@ -91,7 +97,12 @@ function clearForm() {
 function removeBookFromLibrary(event) {
     const bookId = event.target.dataset.id;
     for (book of myLibrary) {
-        if (book.id === bookId) currentLibrary.removeChild(book.bookElement);
+        if (book.id === bookId) {
+            console.log("this ran");
+            currentLibrary.removeChild(book.bookElement);
+            myLibrary = myLibrary.filter((book1) => book1 !== book);
+            console.log(myLibrary);
+        }
     }
 }
 
@@ -99,7 +110,7 @@ function changeStatus(event) {
     const bookId = event.target.dataset.id;
     for (book of myLibrary) {
         if (book.id === bookId) {
-            book.isRead ? book.isRead = false : book.isRead = true;
+            book.isRead ? (book.isRead = false) : (book.isRead = true);
             displayLibrary(myLibrary);
         }
     }

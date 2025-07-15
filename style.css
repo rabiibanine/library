@@ -1,24 +1,91 @@
+:root {
+    --background-color: #F3F7F0;
+    --primary-color: #19323C;
+    --accent-color: #A93F55;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
-    font-family: Inter;
+    font-family: Lora;
+}
+
+body {
+    background-color: #f3f7f0;
 }
 
 fieldset {
     border: none;
 }
 
+h2 {
+    font-size: 2.5rem;
+}
+
+img {
+    width: 70px;
+    align-self: center;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    border-radius: 1px solid var(--background-color);
+    align-self: center;
+}
+
+.book-list>h3 {
+    font-size: 2rem;
+}
+
+.library-editor {
+    font-size: 1.3rem;
+}
+
+.library-editor h3 {
+    font-size: 2rem;
+}
+
+.header {
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #19323c;
+
+    box-shadow: 0 1px 1rem black;
+}
+
+.main {
+    margin: 1rem;
+}
+
+.current-library {
+    border: 1px solid black;
+    max-width: fit-content;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .library {
     display: flex;
     flex-flow: row wrap;
+    min-width: 300px;
 }
 
 .book {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     border: 1px solid black;
     border-radius: 1rem;
@@ -26,6 +93,6 @@ fieldset {
     padding: 1rem;
     margin: 1rem;
 
-    max-width:300px;
+    max-width: max-content;
     flex: 1;
 }
