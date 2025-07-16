@@ -43,18 +43,18 @@ function createBookElement(book) {
     imageElement.alt = 'image of a book';
     bookElement.appendChild(imageElement);
     const nameElement = document.createElement("h3");
-    nameElement.textContent = `Name: ${book.name}`;
+    nameElement.innerHTML = `Name: <span class="light">${book.name}</span>`;
     bookElement.appendChild(nameElement);
     const authorElement = document.createElement("h3");
-    authorElement.textContent = `Author: ${book.author}`;
+    authorElement.innerHTML = `Author: <span class="light">${book.author}</span>`;
     bookElement.appendChild(authorElement);
-    const pagesElement = document.createElement("h4");
-    pagesElement.textContent = `Number Of Pages: ${book.pages}`;
+    const pagesElement = document.createElement("h3");
+    pagesElement.innerHTML = `# Pages: <span class="light">${book.pages}</span>`;
     bookElement.appendChild(pagesElement);
-    const isReadElement = document.createElement("h4");
-    isReadElement.textContent = `Did you read it yet?: ${
+    const isReadElement = document.createElement("h3");
+    isReadElement.innerHTML = `Is it read?: <span class="light">${
         book.isRead ? "yes" : "no"
-    }`;
+    }</span>`;
     bookElement.appendChild(isReadElement);
     const removeSelfButton = document.createElement("button");
     removeSelfButton.textContent = "Remove";
