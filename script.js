@@ -1,3 +1,31 @@
+const lib = document.querySelector('.sidebar__libraries');
+
+class LibraryManager {
+
+    constructor(root) {
+
+        this.root = root;
+        this.libraries = new Array();
+
+    }
+
+    addLibrary(library) {
+
+        this.libraries.push(library);
+
+    }
+
+    render() {
+
+        this.root.innerHTML = `
+            ${this.libraries.map(library => `<li>${library.name}<li>`).join('')}
+        `
+        
+    }
+
+}
+
+
 class Library {
 
     constructor(name) {
@@ -5,25 +33,12 @@ class Library {
         this.name = name;
         this.books = new Array();
         this.id = crypto.randomUUID();
-        this.render();
 
     }
 
     addBook(book) {
 
         this.books.push(book); 
-        this.render();
-
-    }
-
-    render() {
-
-        this.root.innerHTML = `
-            <li class="current-library" data-id="${this.id}">
-                <img src="public/bookshelf.svg" alt="icon of a bookshelf">
-                <h3>${this.name}</h3>
-            </li>
-        `
 
     }
 
@@ -39,46 +54,29 @@ class Book {
         this.pages = pages;
         this.isRead = isRead;
         this.id = crypto.randomUUID();
-        this.render();
-
-    }
-
-    render() {
-
-        this.bookElement = `
-            <li class="book" data-id="${this.id}">
-                <img src="public/book-icon.svg" alt="image of a book">
-                <h3>
-                    Name: 
-                    <span class="light">${this.name}</span>
-                </h3>
-                <h3>
-                    Author: 
-                    <span class="light">${this.author}</span>
-                </h3>
-                <h3>
-                    # Pages: 
-                    <span class="light">${this.pages}</span>
-                </h3>
-                <h3>
-                    Is it read?: 
-                    <span class="light">${this.isRead}</span>
-                </h3>
-                <button class="button remove">Remove</button>
-                <button class="button change-status">Change Status</button>
-            </li>
-            `
 
     }
 
 }
 
+const libraryManager = new LibraryManager(lib);
+
 const book1 = new Book("Hacker's Delight", "Henry S. Warren", 306, false);
 const book2 = new Book("The Art of Computer Programming", "Donald Knuth", 672, false);
 
 const library1 = new Library("mylibrary");
+const library2 = new Library("hisLibrary");
+
 library1.addBook(book1);
 library1.addBook(book2);
+
+library2.addBook(book1);
+library2.addBook(book2);
+
+libraryManager.addLibrary(library1);
+libraryManager.addLibrary(library2);
+
+libraryManager.render();
 
 
 // function displayLibrary(library) {
