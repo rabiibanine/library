@@ -8,48 +8,24 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <header class="header">
-            <h1>library-app</h1>
-        </header>
+        <div class="container">
+            <header class="header">
+                <h1 class="header__title">Library Name</h1>
+                <button class="header__button">Add Book</button>
+            </header>
 
-        <div class="main">
-            <div class="library-list">
-                <h2>Libraries</h2>
-                <ul>
-                    <li class="current-library">
-                        <img
-                            src="public/bookshelf.svg"
-                            alt="icon of a bookshelf"
-                        />
-                        <h3>My Library</h3>
-                    </li>
+            <aside class="sidebar">
+                <h1 class="sidebar__title">Libraries</h1>
+                <ul class="sidebar__libraries">
+                    <li class="sidebar__libraries-element--selected">library 1</li>
+                    <li class="sidebar__libraries-element">library 2</li>
+                    <li class="sidebar__libraries-element">library 3</li>
                 </ul>
-            </div>
-            <div class="book-list">
-                <h2>Books in selected library</h2>
-                <ul class="library"></ul>
-            </div>
-            <div class="library-editor">
-                <h2>Library Editor</h2>
-                <form action="" class="form">
-                    <label for="name">Name:</label>
-                    <input type="text" placeholder="Name" id="name" />
-                    <label for="author">Author:</label>
-                    <input type="text" placeholder="Author" id="author" />
-                    <label for="number-of-pages">Number of Pages:</label>
-                    <input
-                        type="number"
-                        placeholder="Number of Pages"
-                        id="number-of-pages"
-                    />
-                    <label for="is-read">Did you read it?:</label>
-                    <input type="checkbox" id="is-read" />
-                </form>
-            </div>
-            <div class="library-buttons">
-                <button class="button add">Add Book</button>
-                <button class="button clear">Clear Form</button>
-            </div>
+            </aside>
+            
+            <main class="main">
+
+            </main>
         </div>
     </body>
 </html>
