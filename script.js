@@ -1,4 +1,5 @@
-const lib = document.querySelector('.sidebar__libraries');
+const liblist = document.querySelector('.sidebar__libraries');
+const lib = document.querySelector('.main__container')
 
 class LibraryManager {
 
@@ -17,8 +18,16 @@ class LibraryManager {
 
     render() {
 
-        this.root.innerHTML = `
-            ${this.libraries.map(library => `<li>${library.name}<li>`).join('')}
+        this.root.innerHTML =
+        `
+                ${this.libraries.map(library => 
+                    `
+                        <li class="sidebar__libraries-element">
+                            <img class="sidebar__libraries-element-icon" src="public/bookshelf.svg" alt="bookshelf icon"/>
+                            <p class="sidebar__libraries-element-title">${library.name}</p>
+                            <img class="sidebar__libraries-element-remove" src="public/remove.svg" alt="remove library button"/>
+                        </li>
+                        `).join('')}
         `
         
     }
@@ -28,8 +37,9 @@ class LibraryManager {
 
 class Library {
 
-    constructor(name) {
+    constructor(root, name) {
         
+        this.root = root
         this.name = name;
         this.books = new Array();
         this.id = crypto.randomUUID();
@@ -39,6 +49,28 @@ class Library {
     addBook(book) {
 
         this.books.push(book); 
+
+    }
+
+    render() {
+
+        this.root.innerHTML = `
+            ${this.books.map(book =>
+                `
+                <li class="main__book">
+                    <img class ="main__book-icon" src="public/book-icon.svg" alt="image of a book" />
+                    <div class="main__book-text">
+                        <h3>Name: <span class="main__book-text--light">${book.name}</span></h3>
+                        <h3>Author: <span class="main__book-text--light">${book.author}</span></h3>
+                        <h3># of Pages: <span class="main__book-text--light">${book.pages}</span></h3>
+                        <h3>Is it Read?: <span class="main__book-text--light">${book.isRead}</span></h3>
+                    </div>
+                    <button class="main__book-button">Remove</button>
+                    <button class="main__book-button">Read</button>
+                </li>
+                `
+            ).join('')}
+        `
 
     }
 
@@ -59,13 +91,13 @@ class Book {
 
 }
 
-const libraryManager = new LibraryManager(lib);
+const libraryManager = new LibraryManager(liblist);
 
 const book1 = new Book("Hacker's Delight", "Henry S. Warren", 306, false);
 const book2 = new Book("The Art of Computer Programming", "Donald Knuth", 672, false);
 
-const library1 = new Library("mylibrary");
-const library2 = new Library("hisLibrary");
+const library1 = new Library(lib, "mylibrary");
+const library2 = new Library(lib, "hisLibrary");
 
 library1.addBook(book1);
 library1.addBook(book2);
@@ -77,6 +109,7 @@ libraryManager.addLibrary(library1);
 libraryManager.addLibrary(library2);
 
 libraryManager.render();
+library1.render();
 
 
 // function displayLibrary(library) {
