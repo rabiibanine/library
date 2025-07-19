@@ -75,6 +75,15 @@ class Library {
     addBook(book) {
 
         this.books.push(book); 
+        this.render();
+
+    }
+
+    removeBook(event) {
+
+        const removeButtonId = event.target.dataset.id
+        this.books = this.books.filter(book => book.id !== removeButtonId);
+        this.render();
 
     }
 
@@ -91,18 +100,28 @@ class Library {
                         <h3># of Pages: <span class="main__book-text--light">${book.pages}</span></h3>
                         <h3>Is it Read?: <span class="main__book-text--light">${book.isRead}</span></h3>
                     </div>
-                    <button class="main__book-button">Remove</button>
-                    <button class="main__book-button">Read</button>
+                    <button class="main__book-button" data-id="${book.id}">Remove</button>
+                    <button class="main__book-button" data-id="${book.id}">Read</button>
                 </li>
                 `
             ).join('')}
         `
+        this.cacheDOM();
+        this.bindEvents();
 
     }
 
     cacheDOM() {
 
+        this.removeButtons = [...document.querySelectorAll('.main__book-button')];
 
+    }
+
+    bindEvents() {
+
+        for (let removeButton of this.removeButtons) {
+            removeButton.addEventListener('click', this.removeBook.bind(this));
+        }
 
     }
 
