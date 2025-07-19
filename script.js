@@ -13,6 +13,16 @@ class LibraryManager {
     addLibrary(library) {
 
         this.libraries.push(library);
+        this.render();
+
+    }
+
+    removeLibrary(event) {
+
+        console.log('click');
+        let removeButtonId = event.target.dataset.id;
+        this.libraries = this.libraries.filter(library => library.id !== removeButtonId);
+        this.render();
 
     }
 
@@ -25,11 +35,27 @@ class LibraryManager {
                         <li class="sidebar__libraries-element">
                             <img class="sidebar__libraries-element-icon" src="public/bookshelf.svg" alt="bookshelf icon"/>
                             <p class="sidebar__libraries-element-title">${library.name}</p>
-                            <img class="sidebar__libraries-element-remove" src="public/remove.svg" alt="remove library button"/>
+                            <img class="sidebar__libraries-element-remove" data-id="${library.id}" src="public/remove.svg" alt="remove library button"/>
                         </li>
                         `).join('')}
         `
+        this.cacheDOM();
+        this.bindEvents();
         
+    }
+
+    cacheDOM() {
+
+        this.removeButtons = [...document.querySelectorAll('.sidebar__libraries-element-remove')];
+
+    }
+
+    bindEvents() {
+
+        for (let removeButton of this.removeButtons) {
+            removeButton.addEventListener('click', this.removeLibrary.bind(this));
+        }
+
     }
 
 }
@@ -71,6 +97,12 @@ class Library {
                 `
             ).join('')}
         `
+
+    }
+
+    cacheDOM() {
+
+
 
     }
 
