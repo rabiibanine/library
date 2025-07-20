@@ -7,6 +7,10 @@ class LibraryManager {
 
         this.root = root;
         this.libraries = new Array();
+        this.render();
+        this.cacheDOM();
+        this.bindEvents();
+        this.bindEventsOnce();
 
     }
 
@@ -14,12 +18,12 @@ class LibraryManager {
 
         this.libraries.push(library);
         this.render();
+        this.cacheDOM();
 
     }
 
     removeLibrary(event) {
 
-        console.log('click');
         let removeButtonId = event.target.dataset.id;
         this.libraries = this.libraries.filter(library => library.id !== removeButtonId);
         this.render();
@@ -47,6 +51,11 @@ class LibraryManager {
     cacheDOM() {
 
         this.removeButtons = [...document.querySelectorAll('.sidebar__libraries-element-remove')];
+        this.addButton = document.querySelector('.sidebar__header-icon');
+        this.dialogElement = document.querySelector('.sidebar__create-library');
+        this.dialogElementRemove = document.querySelector('.sidebar__create-library-icon');
+        this.dialogElementCreate = document.querySelector('.sidebar__create-library-button');
+        this.dialogElementInput = document.querySelector('.sidebar__create-library-input');
 
     }
 
@@ -55,6 +64,22 @@ class LibraryManager {
         for (let removeButton of this.removeButtons) {
             removeButton.addEventListener('click', this.removeLibrary.bind(this));
         }
+
+    }
+
+    bindEventsOnce() {
+
+        this.addButton.addEventListener('click', () => this.dialogElement.showModal());
+        this.dialogElementRemove.addEventListener('click', () => this.dialogElement.close());
+        this.dialogElementCreate.addEventListener('click', this.handleCreate.bind(this));
+
+    }
+
+    handleCreate() {
+
+        const libraryName = this.dialogElementInput.value;
+        const library = new Library(lib, libraryName);
+        libraryManager.addLibrary(library);
 
     }
 
@@ -159,7 +184,6 @@ library2.addBook(book2);
 libraryManager.addLibrary(library1);
 libraryManager.addLibrary(library2);
 
-libraryManager.render();
 library1.render();
 
 
