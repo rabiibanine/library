@@ -28,6 +28,7 @@ class LibraryManager {
         this.libraries = this.libraries.filter(library => library !== libraryToRemove);
         if (this.selectedLibrary === libraryToRemove) {
             this.selectedLibraryNameElement.textContent = 'Library Name';
+            console.log('this');
             this.selectedLibrary.clearLibrary();
         };
         this.render();
@@ -117,6 +118,9 @@ class Library {
         this.name = name;
         this.books = new Array();
         this.id = crypto.randomUUID();
+        this.cacheDOM();
+        this.bindEvents();
+        this.bindEventsOnce();
 
     }
 
@@ -137,6 +141,7 @@ class Library {
 
     clearLibrary() {
 
+        console.log('helo');
         this.root.innerHTML = ``;
 
     }
@@ -168,6 +173,9 @@ class Library {
     cacheDOM() {
 
         this.removeButtons = [...document.querySelectorAll('.main__book-button')];
+        this.addBookButton = document.querySelector('.header__button');
+        this.dialogElement = document.querySelector('.main__dialog');
+        this.dialogFormElement = document.querySelector('.main__dialog-form');
 
     }
 
@@ -177,6 +185,25 @@ class Library {
             removeButton.addEventListener('click', this.removeBook.bind(this));
         }
 
+    }
+
+    bindEventsOnce() {
+
+        this.addBookButton.addEventListener('click', () => {
+            if (libraryManager.selectedLibrary) this.dialogElement.showModal()
+        });
+
+        this.dialogFormElement.onsubmit = this.handleBookFormSubmit.bind(this);
+
+    }
+
+    handleBookFormSubmit() {
+            const formData = new FormData(this.dialogFormElement);
+            const data = Object.fromEntries(formData.entries());
+            data.isRead = 'isRead' in data;
+            console.log(data);
+            const book = new Book(data.name, data.author, data.pages, data.isRead);
+            libraryManager.selectedLibrary.addBook(book);
     }
 
 }

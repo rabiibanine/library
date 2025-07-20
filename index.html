@@ -28,8 +28,8 @@
 
                 <dialog class="sidebar__create-library">
                     <img class="sidebar__create-library-icon" src="public/remove.svg" alt="close icon">
+                    <h1>Add Library</h1>
                     <form action="" method="dialog">
-                        <h1>Add Library</h1>
                         <input class="sidebar__create-library-input" type="text" placeholder="Name">
                         <button class="sidebar__create-library-button">Create</button>
                     </form>
@@ -40,6 +40,19 @@
                 <ul class="main__container">
 
                 </ul>
+
+                <dialog class="main__dialog">
+                    <img src="public/remove.svg" alt="close icon">
+                    <h1>Add Book</h1>
+                    <form class="main__dialog-form" action="" method="dialog">
+                        <input type="text" placeholder="name" name="name">
+                        <input type="text" placeholder="author" name="author">
+                        <input type="text" placeholder="# of Pages" name="pages">
+                        <label for="is-read">Read?: </label>
+                        <input type="checkbox" id="is-read" name="isRead">
+                        <button class="main__dialog-button">Create</button>
+                    </form>
+                </dialog>
             </main>
         </div>
     </body>

@@ -20,6 +20,22 @@ img {
     width: 30px;
 }
 
+dialog {
+    background-color: #19323c;
+    color: white;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+dialog img {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 /* container */
 
 div.container {
@@ -83,7 +99,7 @@ div.container {
 
 .sidebar__libraries-element:hover {
     cursor: pointer;
-    background-color: #23424e;
+    background-color: #1e3842;
 }
 
 .sidebar__libraries-element-icon {
@@ -101,19 +117,11 @@ div.container {
 /* Sidebar Dialog */
 
 .sidebar__create-library {
-    background-color: #19323c;
-    color: white;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px;
+
 }
 
 .sidebar__create-library-icon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+
 }
 
 /* main */
