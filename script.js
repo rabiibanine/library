@@ -25,12 +25,12 @@ class LibraryManager {
 
     removeLibrary(libraryToRemove) {
 
-        this.libraries = this.libraries.filter(library => library !== libraryToRemove);
         if (this.selectedLibrary === libraryToRemove) {
             this.selectedLibraryNameElement.textContent = 'Library Name';
-            console.log('this');
             this.selectedLibrary.clearLibrary();
         };
+        this.libraries = this.libraries.filter(library => library !== libraryToRemove);
+        this.selectedLibrary = null;
         this.render();
 
     }
@@ -141,8 +141,7 @@ class Library {
 
     clearLibrary() {
 
-        console.log('helo');
-        this.root.innerHTML = ``;
+        this.root.innerHTML = '';
 
     }
 
