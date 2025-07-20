@@ -81,6 +81,11 @@ div.container {
     align-items: center;
 }
 
+.sidebar__libraries-element:hover {
+    cursor: pointer;
+    background-color: #23424e;
+}
+
 .sidebar__libraries-element-icon {
     justify-self: flex-start;
 }
