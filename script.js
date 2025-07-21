@@ -158,8 +158,8 @@ class Library {
                         <h3># of Pages: <span class="main__book-text--light">${book.pages}</span></h3>
                         <h3>Is it Read?: <span class="main__book-text--light">${book.isRead}</span></h3>
                     </div>
-                    <button class="main__book-button" data-id="${book.id}">Remove</button>
-                    <button class="main__book-button" data-id="${book.id}">Read</button>
+                    <button class="main__book-button main__book-button-remove" data-id="${book.id}">Remove</button>
+                    <button class="main__book-button main__book-button-status" data-id="${book.id}">Read</button>
                 </li>
                 `
             ).join('')}
@@ -171,10 +171,11 @@ class Library {
 
     cacheDOM() {
 
-        this.removeButtons = [...document.querySelectorAll('.main__book-button')];
+        this.removeButtons = [...document.querySelectorAll('.main__book-button-remove')];
         this.addBookButton = document.querySelector('.header__button');
         this.dialogElement = document.querySelector('.main__dialog');
         this.dialogFormElement = document.querySelector('.main__dialog-form');
+        this.changeStatusButton = document.querySelector('.main__book-button-status');
 
     }
 
@@ -184,6 +185,13 @@ class Library {
             removeButton.addEventListener('click', this.removeBook.bind(this));
         }
 
+        if (this.changeStatusButton) {
+            this.changeStatusButton.onclick = (e) => {
+            const id = e.target.dataset.id;
+            const book = this.books.find(book => book.id === id);
+            book.changeStatus();
+            }
+        }
     }
 
     bindEventsOnce() {
@@ -200,7 +208,6 @@ class Library {
             const formData = new FormData(this.dialogFormElement);
             const data = Object.fromEntries(formData.entries());
             data.isRead = 'isRead' in data;
-            console.log(data);
             const book = new Book(data.name, data.author, data.pages, data.isRead);
             libraryManager.selectedLibrary.addBook(book);
     }
@@ -220,16 +227,13 @@ class Book {
 
     }
 
+    changeStatus() {
+
+        this.isRead = !this.isRead;
+        libraryManager.selectedLibrary.render();
+
+    }
+
 }
 
 const libraryManager = new LibraryManager(liblist);
-
-const book1 = new Book("Hacker's Delight", "Henry S. Warren", 306, false);
-const book2 = new Book("The Art of Computer Programming", "Donald Knuth", 672, false);
-
-const library1 = new Library(lib, "mylibrary");
-const library2 = new Library(lib, "hisLibrary");
-
-libraryManager.addLibrary(library1);
-libraryManager.addLibrary(library2);
-
