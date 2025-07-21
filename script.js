@@ -151,15 +151,15 @@ class Library {
             ${this.books.map(book =>
                 `
                 <li class="main__book">
-                    <img class ="main__book-icon" src="public/book-icon.svg" alt="image of a book" />
+                    <img class="main__book-icon-remove" src="public/remove.svg" alt="remove book icon" data-id="${book.id}" />
+                    <img class="main__book-icon" src="public/book-icon.svg" alt="image of a book" />
                     <div class="main__book-text">
                         <h3>Name: <span class="main__book-text--light">${book.name}</span></h3>
                         <h3>Author: <span class="main__book-text--light">${book.author}</span></h3>
                         <h3># of Pages: <span class="main__book-text--light">${book.pages}</span></h3>
                         <h3>Is it Read?: <span class="main__book-text--light">${book.isRead}</span></h3>
                     </div>
-                    <button class="main__book-button main__book-button-remove" data-id="${book.id}">Remove</button>
-                    <button class="main__book-button main__book-button-status" data-id="${book.id}">Read</button>
+                    <button class="main__book-button" data-id="${book.id}">Read</button>
                 </li>
                 `
             ).join('')}
@@ -171,11 +171,12 @@ class Library {
 
     cacheDOM() {
 
-        this.removeButtons = [...document.querySelectorAll('.main__book-button-remove')];
+        this.removeButtons = [...document.querySelectorAll('.main__book-icon-remove')];
         this.addBookButton = document.querySelector('.header__button');
         this.dialogElement = document.querySelector('.main__dialog');
         this.dialogFormElement = document.querySelector('.main__dialog-form');
-        this.changeStatusButton = document.querySelector('.main__book-button-status');
+        this.changeStatusButton = document.querySelector('.main__book-button');
+        this.closeDialogButton = document.querySelector('.main__dialog-close');
 
     }
 
@@ -201,6 +202,10 @@ class Library {
         });
 
         this.dialogFormElement.onsubmit = this.handleBookFormSubmit.bind(this);
+
+        this.closeDialogButton.onclick = () => {
+            this.dialogElement.close();
+        }
 
     }
 
@@ -237,3 +242,12 @@ class Book {
 }
 
 const libraryManager = new LibraryManager(liblist);
+
+const book1 = new Book("name", "author", 365, true);
+
+const library1 = new Library(lib, "Library");
+
+library1.addBook(book1);
+
+libraryManager.addLibrary(library1);
+
